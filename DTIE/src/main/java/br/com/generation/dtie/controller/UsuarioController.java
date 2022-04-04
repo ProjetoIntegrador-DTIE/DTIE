@@ -15,41 +15,41 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.generation.dtie.model.Tema;
-import br.com.generation.dtie.repository.TemaRepository;
+import br.com.generation.dtie.model.Usuario;
+import br.com.generation.dtie.repository.UsuarioRepository;
 
 @RestController
-@RequestMapping("/tema")
+@RequestMapping("/usuario")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
-public class TemaController {
+public class UsuarioController {
 
 	@Autowired
-	private TemaRepository repository;
+	private UsuarioRepository repository;
 	
 	@GetMapping
-	public ResponseEntity<List<Tema>> getAll(){
+	public ResponseEntity<List<Usuario>> getAll(){
 		return ResponseEntity.ok(repository.findAll());
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<Tema> getByID(@PathVariable Long id){
+	public ResponseEntity<Usuario> getByID(@PathVariable Long id){
 		return  repository.findById(id).map(resp -> ResponseEntity.ok(resp))
 					.orElse(ResponseEntity.notFound().build());
 	}
 	
-	@GetMapping("/categoria/{categoria}")
-	public ResponseEntity<List<Tema>> getByCategoria(@PathVariable String categoria){
-		return ResponseEntity.ok(repository.findAllByCategoriaContainingIgnoreCase(categoria));
+	@GetMapping("/nome/{nome}")
+	public ResponseEntity<List<Usuario>> getByNome(@PathVariable String nome){
+		return ResponseEntity.ok(repository.findAllByNomeContainingIgnoreCase(nome));
 	}
 	
 	@PostMapping
-	public ResponseEntity<Tema> post(@RequestBody Tema tema){
-		return ResponseEntity.status(HttpStatus.CREATED).body(repository.save(tema));
+	public ResponseEntity<Usuario> post(@RequestBody Usuario usuario){
+		return ResponseEntity.status(HttpStatus.CREATED).body(repository.save(usuario));
 	}
 	
 	@PutMapping
-	public ResponseEntity<Tema> put(@RequestBody Tema tema){
-		return ResponseEntity.ok(repository.save(tema));
+	public ResponseEntity<Usuario> put(@RequestBody Usuario usuario){
+		return ResponseEntity.ok(repository.save(usuario));
 	}
 	
 	@DeleteMapping("/{id}")

@@ -15,41 +15,46 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.generation.dtie.model.Tema;
-import br.com.generation.dtie.repository.TemaRepository;
+import br.com.generation.dtie.model.UF;
+import br.com.generation.dtie.repository.UfRepository;
 
 @RestController
-@RequestMapping("/tema")
+@RequestMapping("/uf")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
-public class TemaController {
+public class UfController {
 
 	@Autowired
-	private TemaRepository repository;
+	private UfRepository repository;
 	
 	@GetMapping
-	public ResponseEntity<List<Tema>> getAll(){
+	public ResponseEntity<List<UF>> getAll(){
 		return ResponseEntity.ok(repository.findAll());
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<Tema> getByID(@PathVariable Long id){
+	public ResponseEntity<UF> getByID(@PathVariable Long id){
 		return  repository.findById(id).map(resp -> ResponseEntity.ok(resp))
 					.orElse(ResponseEntity.notFound().build());
 	}
 	
-	@GetMapping("/categoria/{categoria}")
-	public ResponseEntity<List<Tema>> getByCategoria(@PathVariable String categoria){
-		return ResponseEntity.ok(repository.findAllByCategoriaContainingIgnoreCase(categoria));
+	@GetMapping("/nome/{nome}")
+	public ResponseEntity<List<UF>> getByNome(@PathVariable String nome){
+		return ResponseEntity.ok(repository.findAllByNomeContainingIgnoreCase(nome));
+	}
+	
+	@GetMapping("/sigla/{sigla}")
+	public ResponseEntity<List<UF>> getBySigla(@PathVariable String sigla){
+		return ResponseEntity.ok(repository.findAllBySiglaContainingIgnoreCase(sigla));
 	}
 	
 	@PostMapping
-	public ResponseEntity<Tema> post(@RequestBody Tema tema){
-		return ResponseEntity.status(HttpStatus.CREATED).body(repository.save(tema));
+	public ResponseEntity<UF> post(@RequestBody UF uf){
+		return ResponseEntity.status(HttpStatus.CREATED).body(repository.save(uf));
 	}
 	
 	@PutMapping
-	public ResponseEntity<Tema> put(@RequestBody Tema tema){
-		return ResponseEntity.ok(repository.save(tema));
+	public ResponseEntity<UF> put(@RequestBody UF uf){
+		return ResponseEntity.ok(repository.save(uf));
 	}
 	
 	@DeleteMapping("/{id}")

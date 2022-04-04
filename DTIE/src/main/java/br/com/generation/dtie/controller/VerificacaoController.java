@@ -15,41 +15,41 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.generation.dtie.model.Tema;
-import br.com.generation.dtie.repository.TemaRepository;
+import br.com.generation.dtie.model.Verificacao;
+import br.com.generation.dtie.repository.VerificacaoRepository;
 
 @RestController
-@RequestMapping("/tema")
+@RequestMapping("/verificacao")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
-public class TemaController {
+public class VerificacaoController {
 
 	@Autowired
-	private TemaRepository repository;
+	private VerificacaoRepository repository;
 	
 	@GetMapping
-	public ResponseEntity<List<Tema>> getAll(){
+	public ResponseEntity<List<Verificacao>> getAll(){
 		return ResponseEntity.ok(repository.findAll());
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<Tema> getByID(@PathVariable Long id){
+	public ResponseEntity<Verificacao> getByID(@PathVariable Long id){
 		return  repository.findById(id).map(resp -> ResponseEntity.ok(resp))
 					.orElse(ResponseEntity.notFound().build());
 	}
 	
-	@GetMapping("/categoria/{categoria}")
-	public ResponseEntity<List<Tema>> getByCategoria(@PathVariable String categoria){
-		return ResponseEntity.ok(repository.findAllByCategoriaContainingIgnoreCase(categoria));
+	@GetMapping("/status/{status}")
+	public ResponseEntity<List<Verificacao>> getByNome(@PathVariable String status){
+		return ResponseEntity.ok(repository.findAllByStatusContainingIgnoreCase(status));
 	}
 	
 	@PostMapping
-	public ResponseEntity<Tema> post(@RequestBody Tema tema){
-		return ResponseEntity.status(HttpStatus.CREATED).body(repository.save(tema));
+	public ResponseEntity<Verificacao> post(@RequestBody Verificacao verificacao){
+		return ResponseEntity.status(HttpStatus.CREATED).body(repository.save(verificacao));
 	}
 	
 	@PutMapping
-	public ResponseEntity<Tema> put(@RequestBody Tema tema){
-		return ResponseEntity.ok(repository.save(tema));
+	public ResponseEntity<Verificacao> put(@RequestBody Verificacao verificacao){
+		return ResponseEntity.ok(repository.save(verificacao));
 	}
 	
 	@DeleteMapping("/{id}")
