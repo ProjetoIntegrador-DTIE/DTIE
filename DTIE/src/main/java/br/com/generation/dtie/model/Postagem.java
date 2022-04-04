@@ -24,7 +24,7 @@ public class Postagem {
 	private Long id;
 	
 	@NotNull
-	@Size(min = 10, max = 250)
+	@Size(min = 10, max = 1000)
 	private String texto;
 	
 	@UpdateTimestamp
@@ -45,19 +45,19 @@ public class Postagem {
 	private boolean urgencia;
 
 	@ManyToOne
-	@JsonIgnoreProperties("produto")
+	@JsonIgnoreProperties("postagem")
 	private Tema tema;
 	
 	@ManyToOne
-	@JsonIgnoreProperties("produto")
+	@JsonIgnoreProperties("postagem")
 	private UF uf;
 	
 	@ManyToOne
-	@JsonIgnoreProperties("produto")
+	@JsonIgnoreProperties("postagem")
 	private Usuario usuario;
 	
 	@ManyToOne
-	@JsonIgnoreProperties("produto")
+	@JsonIgnoreProperties("postagem")
 	private Verificacao verificacao;
 
 	
