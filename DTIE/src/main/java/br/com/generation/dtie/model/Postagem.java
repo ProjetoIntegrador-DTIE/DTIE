@@ -42,15 +42,19 @@ public class Postagem {
 	private String complemento;
 	
 	@NotNull
+	@Size(min = 4, max = 50)
+	private String ufNome;
+	
+	@NotNull
+	@Size(min = 2, max = 2)
+	private String ufSigla;
+	
+	@NotNull
 	private boolean urgencia;
 
 	@ManyToOne
 	@JsonIgnoreProperties("postagem")
 	private Tema tema;
-	
-	@ManyToOne
-	@JsonIgnoreProperties("postagem")
-	private UF uf;
 	
 	@ManyToOne
 	@JsonIgnoreProperties("postagem")
@@ -103,6 +107,22 @@ public class Postagem {
 		this.complemento = complemento;
 	}
 	
+	public String getUfNome() {
+		return ufNome;
+	}
+
+	public void setUfNome(String ufNome) {
+		this.ufNome = ufNome;
+	}
+
+	public String getUfSigla() {
+		return ufSigla;
+	}
+
+	public void setUfSigla(String ufSigla) {
+		this.ufSigla = ufSigla;
+	}
+
 	public boolean isUrgencia() {
 		return urgencia;
 	}
@@ -125,14 +145,6 @@ public class Postagem {
 
 	public void setTema(Tema tema) {
 		this.tema = tema;
-	}
-
-	public UF getUf() {
-		return uf;
-	}
-
-	public void setUf(UF uf) {
-		this.uf = uf;
 	}
 
 	public Usuario getUsuario() {
