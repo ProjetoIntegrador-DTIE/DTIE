@@ -16,19 +16,18 @@ import io.swagger.v3.oas.models.responses.ApiResponses;
 public class SwaggerConfig {
 
     @Bean
-    public OpenAPI springBlogPessoalOpenAPI() {
-        return new OpenAPI()
-                .info(new Info()
-                        .title("Projeto Integrador-DTIE")
-                        .description(" Projeto Integrador - Generation Brasil")
-                        .version("v0.0.1")
-                .license(new License()
-                        .name("Generation Brasil")
-                        .url("https://brazil.generation.org/"))
-                .contact(new Contact()
-                        .name("DTIE")
-                        .url("https://github.com/orgs/ProjetoIntegrador-DTIE/")
-                        .email("generationprojint2@gmail.com")))
+    public OpenAPI springDtieOpenAPI() {
+        return new OpenAPI().info(new Info()
+	                        .title("Projeto Integrador-DTIE")
+	                        .description(" Projeto Integrador - Generation Brasil")
+	                        .version("v0.0.1")
+	                .license(new License()
+	                        .name("Generation Brasil")
+	                        .url("https://brazil.generation.org/"))
+	                .contact(new Contact()
+	                        .name("DTIE")
+	                        .url("https://github.com/orgs/ProjetoIntegrador-DTIE/")
+	                        .email("generationprojint2@gmail.com")))
                 .externalDocs(new ExternalDocumentation()
                         .description("Github")
                         .url("https://github.com/orgs/ProjetoIntegrador-DTIE/DTIE"));
